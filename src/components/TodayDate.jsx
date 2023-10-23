@@ -8,9 +8,11 @@ function TodayDate() {
   });
   console.log(dateString);
   return (
-    <div>
-      <p className="text-[28px] font-semibold text-white">{dateString}</p>
-    </div>
+    <>
+      <p className="text-left text-[28px] font-semibold text-white">
+        {dateString}
+      </p>
+    </>
   );
 }
 
