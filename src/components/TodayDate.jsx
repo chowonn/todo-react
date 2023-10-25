@@ -6,7 +6,6 @@ function TodayDate() {
     day: 'numeric',
     weekday: 'long',
   });
-  console.log(dateString);
   return (
     <>
       <p className="text-left text-[28px] font-semibold text-white">
