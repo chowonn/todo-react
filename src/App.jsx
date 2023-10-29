@@ -3,8 +3,10 @@ import TodoHead from './components/TodoHead';
 import TodoInsert from './components/TodoInsert';
 import TodayDate from './components/TodayDate';
 import Clock from './components/Clock';
+import { useState } from 'react';
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to">
       <div className="flex flex-col items-center justify-center gap-[72px]">
@@ -14,9 +16,9 @@ function App() {
             <TodayDate />
             <Clock />
           </div>
-          <TodoList />
+          <TodoList todoList={todoList} setTodoList={setTodoList} />
         </main>
-        <TodoInsert />
+        <TodoInsert todoList={todoList} setTodoList={setTodoList} />
       </div>
     </div>
   );
