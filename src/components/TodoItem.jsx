@@ -3,19 +3,21 @@ import { IoClose } from 'react-icons/io5';
 import { GoCheckCircle } from 'react-icons/go';
 import { GoCheckCircleFill } from 'react-icons/go';
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 
 function TodoItem({ todoItem, todoList, setTodoList }) {
   const { checked } = todoList;
+
+  const handelDeleteTodo = useCallback(() => {
+    setTodoList(todoList.filter((item) => item.id !== todoItem.id));
+  });
+
   return (
     <>
       <li className=" flex items-center justify-between ">
         <div className="flex gap-[10px]">
           {checked ? (
-            <GoCheckCircle
-              size="28"
-              className="mr-[10px] inline-block"
-              color="white"
-            />
+            <GoCheckCircle size="28" className="mr-[10px] inline-block" />
           ) : (
             <GoCheckCircleFill size="28" className="mr-[10px] inline-block" />
           )}
@@ -25,7 +27,7 @@ function TodoItem({ todoItem, todoList, setTodoList }) {
           <button className="">
             <MdEdit size="28" />
           </button>
-          <button>
+          <button type="button" onClick={handelDeleteTodo}>
             <IoClose size="28" />
           </button>
         </div>
@@ -46,6 +48,7 @@ TodoItem.propTypes = {
     })
   ),
   setTodoList: PropTypes.func.isRequired,
+  handelDeleteTodo: PropTypes.func,
 };
 
 export default TodoItem;
