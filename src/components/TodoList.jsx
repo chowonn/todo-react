@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 function TodoList({ todoList, setTodoList }) {
   const handleDeleteAll = useCallback(() => {
     setTodoList([]);
+    localStorage.clear();
   });
   return (
     <>
