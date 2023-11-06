@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 
 function TodoList({ todoList, setTodoList }) {
   const handleDeleteAll = useCallback(() => {
-    setTodoList([]);
-    localStorage.clear();
+    if (window.confirm('모두 삭제하시겠습니까?')) {
+      setTodoList([]);
+      localStorage.clear();
+    }
   });
   return (
     <>
