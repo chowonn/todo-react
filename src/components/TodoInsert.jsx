@@ -38,16 +38,17 @@ function TodoInsert({ todoList, setTodoList }) {
   }, [todoList]);
 
   return (
-    <div>
+    <div className="relative">
       <form onSubmit={handleSubmit}>
         <input
           ref={inputRef}
           type="text"
           value={text}
           onChange={handleInput}
-          className="mb-[102px] h-[62px] w-full rounded-[50px] px-3 py-1"
+          className="mb-[102px] h-[62px] w-full
+           rounded-[50px] px-3 py-1"
         />
-        <button type="submit">
+        <button className="absolute right-2 top-2" type="submit">
           <BsFillArrowUpCircleFill size="44" color="#7F7FD5" />
         </button>
       </form>
