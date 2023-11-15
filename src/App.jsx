@@ -9,15 +9,16 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to">
-      <div className="flex flex-col items-center justify-center gap-[72px]">
+      <div className="m-auto flex w-[914px] flex-col justify-center gap-[72px]">
         <TodoHead />
-        <main className="flex">
+        <main className="flex justify-center">
           <div>
             <TodayDate />
             <Clock />
           </div>
           <TodoList todoList={todoList} setTodoList={setTodoList} />
         </main>
+
         <TodoInsert todoList={todoList} setTodoList={setTodoList} />
       </div>
     </div>
