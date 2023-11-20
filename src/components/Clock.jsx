@@ -20,7 +20,7 @@ function Clock() {
   });
 
   return (
-    <div className="flex flex-col items-start gap-11">
+    <div className="mobile:block flex hidden flex-col items-start gap-11">
       <p className="mt-3 text-[300px] font-extrabold leading-[15rem] text-white">
         {hours}
       </p>
