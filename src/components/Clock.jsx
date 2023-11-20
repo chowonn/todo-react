@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
 import { string } from 'prop-types';
-import { useMediaQuery } from 'react-responsive';
 
 function Clock() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
-  const isSmallScreen = useMediaQuery({
-    query: '(max-width: 480px)',
-  });
 
   useEffect(() => {
     const clock = setInterval(() => {
@@ -24,16 +20,14 @@ function Clock() {
   });
 
   return (
-    !isSmallScreen && (
-      <div className="flex flex-col items-start gap-11">
-        <p className="mt-3 text-[300px] font-extrabold leading-[15rem] text-white">
-          {hours}
-        </p>
-        <p className="text-[300px] font-extrabold leading-[15rem] text-white">
-          {minutes}
-        </p>
-      </div>
-    )
+    <div className="flex flex-col items-start gap-11">
+      <p className="mt-3 text-[300px] font-extrabold leading-[15rem] text-white">
+        {hours}
+      </p>
+      <p className="text-[300px] font-extrabold leading-[15rem] text-white">
+        {minutes}
+      </p>
+    </div>
   );
 }
 
