@@ -46,7 +46,7 @@ function TodoInsert({ todo }) {
           className="absolute right-2 top-2"
           type="submit"
           onClick={handleSubmit}
-          // onKeyPress={handleKeyPress}  onKeyPress 에 밑줄이 그어져 나온 이유는 keyPress 이벤트가 deprecated 되었음. mdn에서도 ketdown 권장함.
+          // onKeyPress={handleKeyPress} keyPress 이벤트가 deprecated 되었음. mdn에서도 keydown 권장함.
           onKeyDown={handleKeyDown}
         >
           <BsFillArrowUpCircleFill size="44" color="#7F7FD5" />
