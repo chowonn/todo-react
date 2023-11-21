@@ -36,6 +36,23 @@ function App() {
     nextId.current += 1;
   };
 
+  const onRemoveTodo = (id) => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      setTodo(todo.filter((todos) => todos.id !== id));
+    }
+  };
+
+  const onToggleChecked = (id) => {
+    setTodo(
+      todo.map((todos) => {
+        // if(todos.id === id){
+        //   todo.checked = !todo.checked; // 토글될 수 있도록 반전
+        // }
+        // return todo;
+        return todos.id === id ? { ...todo, checked: !todo.checked } : todo;
+      })
+    );
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to">
       <div className="m-auto flex w-[914px] flex-col justify-center gap-[72px]">
@@ -45,7 +62,11 @@ function App() {
             <TodayDate />
             <Clock />
           </div>
-          <TodoList todo={todo} />
+          <TodoList
+            todo={todo}
+            onRemoveTodo={onRemoveTodo}
+            onToggleChecked={onToggleChecked}
+          />
         </main>
 
         <TodoInsert todo={todo} onSubmit={handleSubmit} />
