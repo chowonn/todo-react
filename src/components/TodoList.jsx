@@ -10,6 +10,7 @@ function TodoList({ todo, setTodo, onRemoveTodo, onToggleChecked }) {
       localStorage.clear();
     }
   });
+
   return (
     <>
       <h3 className="sr-only">Todo List</h3>
@@ -41,9 +42,8 @@ function TodoList({ todo, setTodo, onRemoveTodo, onToggleChecked }) {
 TodoList.propTypes = {
   todo: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-    }).isRequired
+      todos: PropTypes.object,
+    })
   ),
   setTodo: PropTypes.func,
   handleDeleteAll: PropTypes.func,
