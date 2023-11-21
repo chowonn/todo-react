@@ -4,7 +4,7 @@ import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
 function TodoInsert({ todo }) {
-  const [content, setContent] = useState(''); // 인풋창에 입력하는 투두리스트
+  const [content, setContent] = useState('');
   const inputRef = useRef();
 
   const handleInputChange = useCallback((e) => {
@@ -63,7 +63,7 @@ TodoInsert.propTypes = {
       text: PropTypes.string.isRequired,
     }).isRequired
   ),
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
 };
 
 export default TodoInsert;
