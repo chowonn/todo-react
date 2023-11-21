@@ -60,7 +60,12 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked }) {
               </div>
             ) : (
               <div>
-                <p>{text}</p>
+                {checked ? (
+                  <p className="line-through">{text}</p>
+                ) : (
+                  <p>{text}</p>
+                )}
+                {/* <p>{text}</p> */}
               </div>
             )}
           </div>
