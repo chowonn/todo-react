@@ -3,10 +3,14 @@ import TodoItem from './TodoItem';
 import PropTypes from 'prop-types';
 // import { useCallback } from 'react';
 
-function TodoList({ todoList, setTodoList }) {
+function TodoList({ todo, setTodo, onRemoveTodo, onToggleChecked }) {
   const handleDeleteAll = useCallback(() => {
-    setTodoList([]);
+    if (window.confirm('모두 삭제하시겠습니까?')) {
+      setTodo([]);
+      localStorage.clear();
+    }
   });
+
   return (
     <>
       <h3 className="sr-only">Todo List</h3>
@@ -19,12 +23,14 @@ function TodoList({ todoList, setTodoList }) {
           전체삭제
         </button>
         <ul className="mt-[45px] flex flex-col gap-8">
-          {todoList?.map((todoItem) => (
+          {todo.map((todos) => (
             <TodoItem
-              key={todoItem.id}
-              todoItem={todoItem}
-              todoList={todoList}
-              setTodoList={setTodoList}
+              key={todos.id}
+              // todoItem={todoItem}
+              todos={todos}
+              // setTodo={setTodo}
+              onRemoveTodo={onRemoveTodo}
+              onToggleChecked={onToggleChecked}
             />
           ))}
         </ul>
@@ -34,14 +40,15 @@ function TodoList({ todoList, setTodoList }) {
 }
 
 TodoList.propTypes = {
-  todoList: PropTypes.arrayOf(
+  todo: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-    }).isRequired
+      todos: PropTypes.object,
+    })
   ),
-  setTodoList: PropTypes.func.isRequired,
+  setTodo: PropTypes.func,
   handleDeleteAll: PropTypes.func,
+  onRemoveTodo: PropTypes.func,
+  onToggleChecked: PropTypes.func,
 };
 
 export default TodoList;

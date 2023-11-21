@@ -9,6 +9,10 @@ export default {
         'gradient-from': '#7F7FD5',
         red: '#FF3333',
       },
+
+      screens: {
+        mobile: '480px',
+      },
     },
   },
   plugins: [],

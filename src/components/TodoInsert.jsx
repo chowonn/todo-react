@@ -1,53 +1,54 @@
-import { useCallback, useRef, useState, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 // import { toast } from 'react-hot-toast';
 import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
-function TodoInsert({ todoList, setTodoList }) {
-  const [text, setText] = useState('');
-  const inputRef = useRef(null);
+function TodoInsert({ todo }) {
+  const [content, setContent] = useState('');
+  const inputRef = useRef();
 
-  const handleInput = useCallback((e) => {
-    setText(e.target.value);
+  const handleInputChange = useCallback((e) => {
+    setContent(e.target.value); //e.target.value 사용자가 입력한 값으로 setText에 e.target.value 라는 사용자가 입력한 값을 나타내는 것.
     console.log(e.target.value);
   }, []);
 
-  const handleSubmit = useCallback((e) => {
-    e.preventDefault();
-
-    if (text === '') {
-      // toast.error('닉네임을 입력해주세요.', { icon: '⚠️' });
-      alert('내용을 입력해주세요');
-      console.log('입력해라');
-      return;
-    } else {
-      const newTodo = todoList.concat({
-        id: todoList.length,
-        text,
-        checked: false,
-      });
-      setTodoList(newTodo);
-      localStorage.setItem('todoList', JSON.stringify(newTodo));
-      setText('');
-      inputRef.current.focus();
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
     }
-  });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (content == '') {
+      alert('할 일을 입력해주세요.');
+    }
+    todo.onSubmit(content);
+    setContent('');
+  };
 
   useEffect(() => {
-    console.log(todoList);
-  }, [todoList]);
+    inputRef.current.focus();
+  }, []);
 
   return (
-    <div>
+    <div className="relative">
       <form onSubmit={handleSubmit}>
         <input
-          ref={inputRef}
           type="text"
-          value={text}
-          onChange={handleInput}
-          className="mb-[102px] h-[62px] w-full rounded-[50px] px-3 py-1"
+          ref={inputRef}
+          value={content}
+          onChange={handleInputChange}
+          className="mb-[102px] h-[62px] w-full
+           rounded-[50px] px-3 py-1"
         />
-        <button type="submit">
+        <button
+          className="absolute right-2 top-2"
+          type="submit"
+          onClick={handleSubmit}
+          // onKeyPress={handleKeyPress} keyPress 이벤트가 deprecated 되었음. mdn에서도 keydown 권장함.
+          onKeyDown={handleKeyDown}
+        >
           <BsFillArrowUpCircleFill size="44" color="#7F7FD5" />
         </button>
       </form>
@@ -56,13 +57,13 @@ function TodoInsert({ todoList, setTodoList }) {
 }
 
 TodoInsert.propTypes = {
-  todoList: PropTypes.arrayOf(
+  todo: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
     }).isRequired
   ),
-  setTodoList: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
 };
 
 export default TodoInsert;
