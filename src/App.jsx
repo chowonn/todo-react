@@ -45,14 +45,12 @@ function App() {
   const onToggleChecked = (id) => {
     setTodo(
       todo.map((todos) => {
-        // if(todos.id === id){
-        //   todo.checked = !todo.checked; // 토글될 수 있도록 반전
-        // }
-        // return todo;
-        return todos.id === id ? { ...todo, checked: !todo.checked } : todo;
+        return todos.id === id ? { ...todos, checked: !todos.checked } : todos;
+        // return todos.id === id ? { ...todo, checked: !todo.checked } : todo;
       })
     );
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to">
       <div className="m-auto flex w-[914px] flex-col justify-center gap-[72px]">
@@ -64,6 +62,7 @@ function App() {
           </div>
           <TodoList
             todo={todo}
+            setTodo={setTodo}
             onRemoveTodo={onRemoveTodo}
             onToggleChecked={onToggleChecked}
           />
