@@ -34,6 +34,7 @@ function App() {
     });
     setTodo(newTodo);
     nextId.current += 1;
+    console.log(newTodo);
   };
 
   const onRemoveTodo = (id) => {
@@ -68,7 +69,7 @@ function App() {
           />
         </main>
 
-        <TodoInsert todo={todo} onSubmit={handleSubmit} />
+        <TodoInsert onSubmit={handleSubmit} />
       </div>
     </div>
   );
