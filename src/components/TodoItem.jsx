@@ -1,10 +1,10 @@
-import { MdEdit } from 'react-icons/md';
+import { MdEdit, MdDeleteForever } from 'react-icons/md';
+import { FaCheck } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
 import { GoCheckCircle } from 'react-icons/go';
 import { GoCheckCircleFill } from 'react-icons/go';
 import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
-import { AiOutlineCheck } from 'react-icons/ai';
 
 // 작성된 투두 상태 를 map 으로 li에 todos이라는 새 배열을 반환함. => 이게 작성되는 투두 내용
 // 작성된 투두 목록에서 관리해야할 기능은? => 수정, 삭제, 보여주기 , 체크박스
@@ -72,17 +72,21 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked }) {
         </form>
         <div className="flex gap-[10px]">
           {edit ? (
-            // <button type="button" onClick={onClickSubmitButton}>
-            <button type="button">
-              <AiOutlineCheck size="28" />
-            </button>
+            <>
+              <button type="button" onClick={onClickEditButton}>
+                <FaCheck size="24" color="#228B22" />
+              </button>
+              <button type="button" onClick={() => onRemoveTodo(id)}>
+                <IoClose size="28" color="#ff0000" />
+              </button>
+            </>
           ) : (
             <>
               <button type="button" onClick={onClickEditButton}>
                 <MdEdit size="28" />
               </button>
               <button type="button" onClick={() => onRemoveTodo(id)}>
-                <IoClose size="28" />
+                <MdDeleteForever size="28" />
               </button>
             </>
           )}
