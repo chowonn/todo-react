@@ -24,7 +24,7 @@ function App() {
     },
   ]);
 
-  const nextId = useRef(0);
+  const nextId = useRef(4);
 
   const handleSubmit = (text) => {
     const newTodo = todo.concat({
