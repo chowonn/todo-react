@@ -47,8 +47,17 @@ function App() {
     setTodo(
       todo.map((todos) => {
         return todos.id === id ? { ...todos, checked: !todos.checked } : todos;
-        // return todos.id === id ? { ...todo, checked: !todo.checked } : todo;
       })
+    );
+  };
+
+  const onEditTodo = (id, newText) => {
+    //어떤 글을 수정할지 모르니까 수정할 글의 id를 받고, 어떻게 내용을 변경시킬건지 매개변수로 받음.
+    //어떻게 수정할까? setTodo 내용을 바꿔주면 된다!
+    setTodo(
+      todo.map((todos) =>
+        todos.id === id ? { ...todos, text: newText } : todos
+      )
     );
   };
 
@@ -66,6 +75,7 @@ function App() {
             setTodo={setTodo}
             onRemoveTodo={onRemoveTodo}
             onToggleChecked={onToggleChecked}
+            onEditTodo={onEditTodo}
           />
         </main>
 
