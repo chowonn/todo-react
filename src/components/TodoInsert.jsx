@@ -3,12 +3,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
-function TodoInsert({ todo }) {
+function TodoInsert({ onSubmit }) {
   const [content, setContent] = useState('');
   const inputRef = useRef();
 
   const handleInputChange = useCallback((e) => {
-    setContent(e.target.value); //e.target.value 사용자가 입력한 값으로 setText에 e.target.value 라는 사용자가 입력한 값을 나타내는 것.
+    setContent(e.target.value);
     console.log(e.target.value);
   }, []);
 
@@ -22,8 +22,9 @@ function TodoInsert({ todo }) {
     e.preventDefault();
     if (content == '') {
       alert('할 일을 입력해주세요.');
+      return;
     }
-    todo.onSubmit(content);
+    onSubmit(content);
     setContent('');
   };
 
@@ -63,7 +64,8 @@ TodoInsert.propTypes = {
       text: PropTypes.string.isRequired,
     }).isRequired
   ),
-  handleSubmit: PropTypes.func,
+  // handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
 export default TodoInsert;

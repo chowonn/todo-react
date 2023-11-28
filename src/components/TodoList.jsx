@@ -1,9 +1,14 @@
 import { useCallback } from 'react';
 import TodoItem from './TodoItem';
 import PropTypes from 'prop-types';
-// import { useCallback } from 'react';
 
-function TodoList({ todo, setTodo, onRemoveTodo, onToggleChecked }) {
+function TodoList({
+  todo,
+  setTodo,
+  onRemoveTodo,
+  onToggleChecked,
+  onEditTodo,
+}) {
   const handleDeleteAll = useCallback(() => {
     if (window.confirm('모두 삭제하시겠습니까?')) {
       setTodo([]);
@@ -26,11 +31,10 @@ function TodoList({ todo, setTodo, onRemoveTodo, onToggleChecked }) {
           {todo.map((todos) => (
             <TodoItem
               key={todos.id}
-              // todoItem={todoItem}
               todos={todos}
-              // setTodo={setTodo}
               onRemoveTodo={onRemoveTodo}
               onToggleChecked={onToggleChecked}
+              onEditTodo={onEditTodo}
             />
           ))}
         </ul>
@@ -42,13 +46,14 @@ function TodoList({ todo, setTodo, onRemoveTodo, onToggleChecked }) {
 TodoList.propTypes = {
   todo: PropTypes.arrayOf(
     PropTypes.shape({
-      todos: PropTypes.object,
+      todos: PropTypes.array,
     })
   ),
   setTodo: PropTypes.func,
   handleDeleteAll: PropTypes.func,
   onRemoveTodo: PropTypes.func,
   onToggleChecked: PropTypes.func,
+  onEditTodo: PropTypes.func,
 };
 
 export default TodoList;
