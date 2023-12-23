@@ -22,9 +22,15 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked, onEditTodo }) {
 
   const toggleEdit = () => setEdit(!edit);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      handelEdit();
+    }
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   //수정 상태에서 수정 내용 작성하다가 취소를 누르고 다시 수정을 누르면 이전에 작성하다만 수정 내용이 그대로 담겨있게됨.
   //  const [updateText, setUpdateText] = useState(text); text가 담겨있는데, 결국 input을 관리하는건 updateText임.
@@ -37,7 +43,8 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked, onEditTodo }) {
   };
 
   // handleEdit 이 실행되면 onEditTodo를 실행해야함. 그래야 App.jsx가 데이터가 수정됨
-  const handelEdit = () => {
+  const handelEdit = (e) => {
+    e.preventDefault();
     if (updateText.length < 1) {
       // 수정input에 아무것도 입력하지 않고 완료버튼을 누를 때 포커스
       inputRef.current.focus();
@@ -51,7 +58,7 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked, onEditTodo }) {
   return (
     <>
       <li className=" flex items-center justify-between ">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handelEdit}>
           <div type="button" className="flex gap-[10px]">
             <button type="button" onClick={() => onToggleChecked(id)}>
               {checked ? (
@@ -65,14 +72,14 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked, onEditTodo }) {
             </button>
 
             {edit ? (
-              <div>
-                <input
-                  value={updateText}
-                  ref={inputRef}
-                  onChange={(e) => setUpdateText(e.target.value)}
-                />
-              </div>
+              // <form onSubmit={handelEdit}>
+              <input
+                value={updateText}
+                ref={inputRef}
+                onChange={(e) => setUpdateText(e.target.value)}
+              />
             ) : (
+              // </form>
               <div>
                 {checked ? (
                   <p className="line-through">{text}</p>
@@ -95,7 +102,11 @@ function TodoItem({ todos, onRemoveTodo, onToggleChecked, onEditTodo }) {
             </>
           ) : (
             <>
-              <button type="button" onClick={handelEdit}>
+              <button
+                type="submit"
+                onClick={handelEdit}
+                onKeyDown={handleEnter}
+              >
                 <FaCheck size="24" color="#228B22" />
               </button>
               <button type="button" onClick={handleQuitEdit}>
@@ -122,6 +133,7 @@ TodoItem.propTypes = {
   onToggleChecked: PropTypes.func,
   handelEdit: PropTypes.func,
   onEditTodo: PropTypes.func,
+  handleEnter: PropTypes.func,
 };
 
 export default TodoItem;
