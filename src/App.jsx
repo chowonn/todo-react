@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to">
-      <div className="m-auto flex w-[914px] flex-col justify-center gap-[72px]">
+      <div className="m-auto flex w-full max-w-screen-md flex-col justify-center gap-[72px] md:w-[768px]">
         <TodoHead />
         <main className="flex justify-center">
           <div>
