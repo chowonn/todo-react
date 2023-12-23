@@ -2,7 +2,18 @@
 export default {
   content: ['./index.html', './src/**/*.js', './src/**/*.jsx'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'gradient-to': '#91EAE4',
+        'gradient-via': '#86A8E7',
+        'gradient-from': '#7F7FD5',
+        red: '#FF3333',
+      },
+
+      screens: {
+        mobile: '480px',
+      },
+    },
   },
   plugins: [],
 };
